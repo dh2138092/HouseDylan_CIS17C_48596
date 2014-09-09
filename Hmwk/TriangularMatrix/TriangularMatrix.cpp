@@ -1,190 +1,66 @@
 /*
-	Title: Triangular, 2-Dimensional, and 1-Dimensional Arrays/Matrices
+	Title: Triangular, 2-Dimensional, and 1-Dimensional Matrices
 	Author: Dylan R. House
-	Date: August 28, 2014
+	Date: September 9, 2014
 */
 
-#include <cstdlib>
-#include <iostream>
-#include <ctime>
-
-
-int*  FillArray(int);                // 1-D Array
-int** FillArray(int, int);           // 2-D Array
-int** FillArray(int, int *);         // Tri Array
-
-void PrintArray(int *, int, int);    // 1-D Array
-void PrintArray(int **, int, int);   // 2-D Array
-void PrintArray(int **, int, int *); // Tri Array
-
-void DestroyArray(int *);            // 1-D Array
-void DestroyArray(int **, int);      // 2-D & Tri Arrays
-
+#include "TriangularMatrix.h"
 
 int main(int argc, char *argv[])
 {
-	srand((unsigned int) time(0));
+	srand((unsigned int)time(0));
+
+	// Initialize the dimensions of the 1-d array and triangular matrix
 	int rows = 10;
-	//int columns = 10;
-	int cls = rows;
-	int columns_per_line = 10;
+	int columns = rows;
+	int columnsPerLine = 10;
 
-	int *array_1D = FillArray(cls);
-	//int **array_2D = FillArray(rows, columns);
-	int **array_triangular = FillArray(rows, array_1D);
+	std::cout << "Start of the demo. \n\n\n\n";
 
-	//PrintArray(array_2D, rows, columns);
-	PrintArray(array_1D, cls, columns_per_line);
-	PrintArray(array_triangular, rows, array_1D);
+	//////////////////////////////////////////////////////////////
+	// Demo the TriangularMatrix class using INTEGER data types //
+	//////////////////////////////////////////////////////////////
 
-	//DestroyArray(array_2D, rows);
-	DestroyArray(array_triangular, rows);
-	DestroyArray(array_1D);
+	// Initialize a TriangularMatrix class that handles INTEGER data types
+	TriangularMatrix<int> triangularMatrixInt;
+
+	// Fill the 1-dimensional array and triangular matrix with random numbers
+	int *array1dInt = triangularMatrixInt.FillArray(columns);
+	int **arrayTriangularInt = triangularMatrixInt.FillArray(rows, array1dInt);
+
+	// Print out the arrays
+	std::cout << "INTEGER 1-D array: \n";
+	triangularMatrixInt.PrintArray(array1dInt, columns, columnsPerLine);
+	std::cout << "INTEGER tri matrix: \n";
+	triangularMatrixInt.PrintArray(arrayTriangularInt, array1dInt, rows);
+
+	// Cleanup and get rid of the arrays
+	triangularMatrixInt.DestroyArray(arrayTriangularInt, rows);
+	triangularMatrixInt.DestroyArray(array1dInt);
+
+	std::cout << "\n=============================\n\n\n";
+	////////////////////////////////////////////////////////////
+	// Demo the TriangularMatrix class using FLOAT data types //
+	////////////////////////////////////////////////////////////
+
+	// Initialize a TriangularMatrix class that handles FLOAT data types
+	TriangularMatrix<float> triangularMatrixFloat;
+
+	// Fill the 1-dimensional array and triangular matrix with random numbers
+	float *array1dFloat = triangularMatrixFloat.FillArray(columns);
+	float **arrayTriangularFloat = triangularMatrixFloat.FillArray(rows, array1dFloat);
+
+	// Print out the arrays
+	std::cout << "FLOAT 1-D array: \n";
+	triangularMatrixFloat.PrintArray(array1dFloat, columns, columnsPerLine);
+	std::cout << "FLOAT tri matrix: \n";
+	triangularMatrixFloat.PrintArray(arrayTriangularFloat, array1dFloat, rows);
+
+	// Cleanup and get rid of the arrays
+	triangularMatrixFloat.DestroyArray(arrayTriangularFloat, rows);
+	triangularMatrixFloat.DestroyArray(array1dFloat);
+
+	std::cout << "\n\nEnd of the demo. \n\n";
 
 	return 0;
-}
-
-/////////////////////////////////
-////////// 1-D Array ////////////
-/////////////////////////////////
-
-int* FillArray(int columns)
-{
-	int *array = new int[columns];
-
-	// Fill the array with random numbers 1 thru 10.
-	for ( int column = 0; column < columns; column++ ) 
-	{
-		array[column] = rand() % 9 + 2; 
-	}
-
-	return array;
-}
-
-void PrintArray(int *array, int columns, int columns_per_line)
-{
-	std::cout << std::endl;
-
-	for ( int column = 0; column < columns; column++ )
-	{
-		std::cout << array[column] << " ";
-
-		if ( column % columns_per_line == (columns_per_line - 1) )
-		{
-			std::cout << std::endl;
-		}
-	}
-
-	std::cout << std::endl;
-}
-
-void DestroyArray(int *array)
-{
-	delete[] array;
-	array = NULL;
-}
-
-/////////////////////////////////
-/////////// 2-D Array ///////////
-/////////////////////////////////
-
-int** FillArray(int rows, int columns)
-{
-	// Declare the 2-D array by establishing the desired number of rows in it.
-	int **array = new int*[rows]; 
-
-	// Add desired number of columns to each row in the array.
-	for ( int row = 0; row < rows; row++ ) 
-	{
-		array[row] = new int[columns]; 
-	}
-
-	// Fill the array with random 2-digit numbers.
-	for ( int row = 0; row < rows; row++ ) 
-	{
-		for ( int column = 0; column < columns; column++ )
-		{
-			array[row][column] = rand() % 90 + 10; 
-		}
-	}
-
-	return array;
-}
-
-void PrintArray(int **array, int rows, int columns)
-{
-	std::cout << std::endl;
-
-	for ( int row = 0; row < rows; row++ )
-	{
-		for ( int column = 0; column < columns; column++ )
-		{
-			std::cout << array[row][column] << " ";
-		}
-
-		std::cout << std::endl;
-	}
-
-	std::cout << std::endl;
-}
-
-/////////////////////////////////
-/////// Triangular Array ////////
-/////////////////////////////////
-
-int** FillArray(int rows, int *array_1D)
-{
-	// Declare the 2-D array and establish the desired number of rows
-	int **array = new int*[rows]; 
-
-	// # of columns in row i = value at array_1D[i]
-	for ( int row = 0; row < rows; row++ )
-	{
-		array[row] = new int[array_1D[row]]; 
-	}
-
-	// Fill each entry of the array with random 2-digit numbers
-	for ( int row = 0; row < rows; row++ ) 	
-	{
-		for ( int column = 0; column < array_1D[row]; column++ )
-		{
-			array[row][column] = rand() % 90 + 10;
-		}
-	}
-
-	return array;
-}
-
-void PrintArray(int **array, int rows, int *array_1D)
-{
-	std::cout << std::endl;
-
-	for ( int row = 0; row < rows; row++ )
-	{
-		for ( int column = 0; column < array_1D[row]; column++ )
-		{
-			std::cout << array[row][column] << " ";
-		}
-
-		std::cout << std::endl;
-	}
-
-	std::cout << std::endl;
-}
-
-//////////////////////////////////
-// 2-D Array & Triangular Array //
-//////////////////////////////////
-
-void DestroyArray(int **array, int rows)
-{
-	// Destroy columns.
-	for ( int row = 0; row < rows; row++ ) 
-	{
-		delete[] array[row];
-	}
-
-	// Destroy row pointers.
-	delete[] array; 
-	array = NULL;
 }
