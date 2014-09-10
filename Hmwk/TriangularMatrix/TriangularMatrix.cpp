@@ -63,4 +63,8 @@ int main(int argc, char *argv[])
 	std::cout << "\n\nEnd of the demo. \n\n";
 
 	return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fa4ac3ccc94bc1a2788d3dffa0bf8d09b8b7d676

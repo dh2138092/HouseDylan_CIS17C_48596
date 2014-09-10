@@ -154,4 +154,8 @@ void TriangularMatrix<T>::DestroyArray(T **array)
 	array = NULL;
 }
 
+<<<<<<< HEAD
 #endif
+=======
+#endif
+>>>>>>> fa4ac3ccc94bc1a2788d3dffa0bf8d09b8b7d676
