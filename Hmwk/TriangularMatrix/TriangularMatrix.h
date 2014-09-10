@@ -9,27 +9,42 @@ template <class T>
 class TriangularMatrix
 {
 private:
+	int _rows;
+	int _columns;
+	int _columnsPerRow;
 
 public:
 	TriangularMatrix();
+	TriangularMatrix(int rows, int columnsPerRow);
 	~TriangularMatrix();
 
 	// 1-D array
-	T* FillArray(int columns);
-	void PrintArray(T *array1d, int columns, int columnsPerLine);
+	T* FillArray();
+	void PrintArray(T *array1d);
 	void DestroyArray(T *array1d);
 
 	// Tri array
-	T** FillArray(int rows, T *array1d);
-	void PrintArray(T **arrayTriangular, T *array1d, int rows);
-	void DestroyArray(T **arrayTriangular, int rows);
+	T** FillArray(T *array1d);
+	void PrintArray(T **arrayTriangular, T *array1d);
+	void DestroyArray(T **arrayTriangular);
 };
 
 template <class T>
 TriangularMatrix<T>::TriangularMatrix()
 {
-
+	_rows = 0;
+	_columns = 0;
+	_columnsPerRow = 0;
 }
+
+template <class T>
+TriangularMatrix<T>::TriangularMatrix(int rows, int columnsPerRow)
+{
+	_rows = rows;
+	_columns = rows;
+	_columnsPerRow = columnsPerRow;
+}
+
 
 template <class T>
 TriangularMatrix<T>::~TriangularMatrix()
@@ -42,11 +57,11 @@ TriangularMatrix<T>::~TriangularMatrix()
 /////////////////////////////////
 
 template <class T>
-T* TriangularMatrix<T>::FillArray(int columns)
+T* TriangularMatrix<T>::FillArray()
 {
-	T *array = new T[columns];
+	T *array = new T[_columns];
 
-	for (int column = 0; column < columns; column++)
+	for ( int column = 0; column < _columns; column++ )
 	{
 		array[column] = rand() % 9 + 2;
 	}
@@ -55,15 +70,15 @@ T* TriangularMatrix<T>::FillArray(int columns)
 }
 
 template <class T>
-void TriangularMatrix<T>::PrintArray(T *array, int columns, int columnsPerLine)
+void TriangularMatrix<T>::PrintArray(T *array)
 {
 	std::cout << std::endl;
 
-	for (int column = 0; column < columns; column++)
+	for ( int column = 0; column < _columns; column++ )
 	{
 		std::cout << array[column] << " ";
 
-		if (column % columnsPerLine == (columnsPerLine - 1))
+		if ( column % _columnsPerRow == (_columnsPerRow - 1) )
 		{
 			std::cout << std::endl;
 		}
@@ -84,19 +99,19 @@ void TriangularMatrix<T>::DestroyArray(T *array)
 /////////////////////////////////
 
 template <class T>
-T** TriangularMatrix<T>::FillArray(int rows, T *array_1D)
+T** TriangularMatrix<T>::FillArray(T *array_1D)
 {
 	// Declare the 2-D array and establish the desired number of rows
-	T **array = new T*[rows];
+	T **array = new T*[_rows];
 
 	// # of columns in row i = value at array_1D[i]
-	for (int row = 0; row < rows; row++)
+	for (int row = 0; row < _rows; row++)
 	{
 		array[row] = new T[array_1D[row]];
 	}
 
 	// Fill each entry of the array with random 2-digit numbers
-	for (int row = 0; row < rows; row++)
+	for (int row = 0; row < _rows; row++)
 	{
 		for (int column = 0; column < array_1D[row]; column++)
 		{
@@ -108,11 +123,11 @@ T** TriangularMatrix<T>::FillArray(int rows, T *array_1D)
 }
 
 template <class T>
-void TriangularMatrix<T>::PrintArray(T **array, T *array_1D, int rows)
+void TriangularMatrix<T>::PrintArray(T **array, T *array_1D)
 {
 	std::cout << std::endl;
 
-	for (int row = 0; row < rows; row++)
+	for (int row = 0; row < _rows; row++)
 	{
 		for (int column = 0; column < array_1D[row]; column++)
 		{
@@ -126,10 +141,10 @@ void TriangularMatrix<T>::PrintArray(T **array, T *array_1D, int rows)
 }
 
 template <class T>
-void TriangularMatrix<T>::DestroyArray(T **array, int rows)
+void TriangularMatrix<T>::DestroyArray(T **array)
 {
 	// Destroy columns.
-	for (int row = 0; row < rows; row++)
+	for (int row = 0; row < _rows; row++)
 	{
 		delete[] array[row];
 	}
