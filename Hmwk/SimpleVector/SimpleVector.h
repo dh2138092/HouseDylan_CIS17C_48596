@@ -1,6 +1,7 @@
 // SimpleVector class template
 #ifndef SIMPLEVECTOR_H
 #define SIMPLEVECTOR_H
+
 #include <iostream>
 #include <new>       // Needed for bad_alloc exception
 #include <cstdlib>   // Needed for the exit function
@@ -11,7 +12,7 @@ class SimpleVector
 {
 private:
    T *_buffer;          // To point to the allocated array
-   int _size;    // Number of elements in the array
+   int _size;           // Number of elements in the array
    int _capacity;
    void memError();  // Handles memory allocation errors
    void subError();  // Handles subscripts out of range
@@ -39,6 +40,9 @@ public:
    // Accessor to return the array size
    int size() const
       { return _size; }
+
+   int capacity() const
+      { return _capacity; }
 
    // Accessor to return a specific element
    T getElementAt(int position);
@@ -130,23 +134,61 @@ void SimpleVector<T>::subError()
 template <class T>
 void SimpleVector<T>::push(const T &element)
 {
-	if ( _size == _capacity )
+	// If the size of the array = its capacity... We need to expand its capacity by 1. So...
+	if ( _size == _capacity ) 
 	{
-		int new_capacity = _capacity > 0 ? 2 * _capacity : 2;
-		T *newBuffer = new T[new_capacity];
-		std::copy(_buffer, _buffer + _size, newBuffer);
-		std::swap(_capacity, new_capacity);
+		// ... expand array's capacity by 1
+		int newCapacity = _capacity + 1; 
+
+		// Create a temp array with capacty = new capacity
+		// i.e.
+		//      old array = [][][][][]
+		//                  capacity = 5
+		//      new array = [][][][][][] 
+		//                  new capacity = capacity + 1 = 6
+		T *newBuffer = new T[newCapacity]; 
+
+		// Copy data from the old array into the temp array
+		// i.e.
+		//      old array = [7][2][3][1][5]
+		//      new array = [7][2][3][1][5][]
+		std::copy(_buffer, _buffer + _size, newBuffer); 
+		
+		_capacity = newCapacity;
+
+		// Swap data between old array and temp array
+		// i.e.
+		//      old array = [7][2][3][1][5][]
+		//      new array = [7][2][3][1][5]
 		std::swap(_buffer, newBuffer);
+		
+		// Temp array is no longer needed, so free up that space of memory
 		delete[] newBuffer;
 	}
 
+	// Add the new element onto the top of the array
+	// i.e.
+	//      old array = [7][2][3][1][5][]
+	//      new array = [7][2][3][1][5][new element]
 	_buffer[_size++] = element;
 }
 
 template <class T>
-void pull()
+void SimpleVector<T>::pull()
 {
+	// Create a new temporary array with new capacity = capacity -1
+	int newCapacity = _capacity - 1;
+	T *newBuffer = new T[newCapacity];
 
+	// Define for the vector that its capacity and size are decreasing by 1
+	_capacity = newCapacity;
+	_size--;
+
+	// Copy data from old buffer to new buffer
+	std::copy(_buffer, _buffer + _size, newBuffer);
+	std::swap(_buffer, newBuffer);
+
+	delete[] newBuffer;
 }
 
 //*******************************************************
