@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	///////////////////////////////////////////////////////
 
 	srand(static_cast<int> (time(0)));
-	int size = 10;
+	int size = 5;
 	int howManyToPush = 5;
 	int howManyToPull = 0;
 	int randomNum = 0;
@@ -32,14 +32,16 @@ int main(int argc, char **argv)
 
 	std::cout << "==================================\n"
 		<< "Demonstrating SimpleVector::push()\n"
-		<< "==================================\n\n";
+		<< "==================================\n\n"
+		<< "Pushing " << howManyToPush << " random numbers into the vector...\n\n";
 
 	// Push howManyToPush number of elements into the vector
 	for (int i = 0; i < howManyToPush; i++)
 	{
 		// Pushing a random number into the vector
 		randomNum = rand() % 200 + 2;
-		std::cout << "Pushing:               " << randomNum << endl;
+		std::cout << i + 1 << ".\n"
+			      << "Pushing:               " << randomNum << endl;
 		list.push(randomNum);
 		std::cout << "Vector's new size:     " << list.size() << endl;
 		std::cout << "Vector's new capacity: " << list.capacity() << endl;
