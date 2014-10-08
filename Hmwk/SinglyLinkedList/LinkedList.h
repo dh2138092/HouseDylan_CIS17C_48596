@@ -1,3 +1,8 @@
+/*
+	Copy Constructor and Assignment Operator
+	Extract
+*/
+
 #ifndef LINKEDLIST_H
 #define	LINKEDLIST_H
 
@@ -8,9 +13,15 @@ class LinkedList
 public:
 	LinkedList();
 	~LinkedList();
+
+	int first();
+	int last();
+	void insertBefore(int, int);
+	void insertAfter(int, int);
+
 	int isEmpty();
-	void addToHead(int);
-	void addToTail(int);
+	void addToHead(int); // Prepend()
+	void addToTail(int); // Append()
 	int deleteFromHead();
 	int deleteFromTail();
 	void deleteNode(int);

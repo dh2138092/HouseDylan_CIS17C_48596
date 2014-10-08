@@ -23,6 +23,55 @@ LinkedList::~LinkedList()
 	}
 }
 
+int LinkedList::first()
+{
+	return head->data;
+}
+
+int LinkedList::last()
+{
+	return tail->data;
+}
+
+void LinkedList::insertBefore(int reference, int data)
+{
+	if (isEmpty())
+		return;
+
+	Node *currentNode = head;
+
+	while (currentNode->next != NULL)
+	{
+		if (currentNode->next->data == reference)
+		{
+			Node *n = new Node(data);
+			n->next = currentNode->next;
+			currentNode->next = n;
+			return;
+		}
+
+		currentNode = currentNode->next;
+	}
+}
+
+void LinkedList::insertAfter(int reference, int data)
+{
+	Node *currentNode = head;
+
+	while (currentNode != NULL)
+	{
+		if (currentNode->data == reference)
+		{
+			Node *n = new Node(data);
+			n->next = currentNode->next;
+			currentNode->next = n;
+			return;
+		}
+
+		currentNode = currentNode->next;
+	}
+}
+
 int LinkedList::isEmpty()
 {
 	return head == NULL;
