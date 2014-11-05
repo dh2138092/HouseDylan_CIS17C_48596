@@ -27,13 +27,13 @@ double futureValue(double presentValue, double rate, int time)
 	}
 }
 
-int main(int argc, char *argv[])
+void sumDemo()
 {
 	// Demo for RECURSIVELY calculating the sum of all
 	// elements in an array of integers.
-	
+
 	std::cout << "Demo of recursively calculating the sum\n"
-		      << "of all integers in a given array\n\n";
+		<< "of all integers in a given array\n\n";
 
 	int const SIZE_1 = 5;
 	int mArray_1[SIZE_1] = { NULL };
@@ -71,16 +71,17 @@ int main(int argc, char *argv[])
 
 	std::cout << "\nSUM = " << sum(mArray_3, SIZE_3 - 1) << "\n\n";
 
-	/* ------------------------------------------------------- */
 	std::cout << "====================================\n\n";
-	/* ------------------------------------------------------- */
+}
 
+void futureValueDemo()
+{
 	// Demo for RECURSIVELY calculating the future value
 	// of savings given a present value, interest rate,
 	// and number of years.
 
 	std::cout << "Demo of recursively calculating the future value\n"
-		      << "given a present value, interest rate, and period of time\n\n";
+		<< "given a present value, interest rate, and period of time\n\n";
 
 	double presentValue = 3000.00;
 	double rate = 0.05;
@@ -92,7 +93,7 @@ int main(int argc, char *argv[])
 		<< "         Time = " << time << " years\n\n"
 		<< "FUTURE VALUE  = " << presentValue << " * ( 1 + " << rate << " ) ^ " << time << "\n\n"
 		<< "FUTURE VALUE  = $" << std::showpoint << futureValue(presentValue, rate, time) << "\n\n";
-	
+
 	std::cout << "----------\n\n";
 
 	presentValue = 50328.27;
@@ -118,6 +119,14 @@ int main(int argc, char *argv[])
 		<< "         Time = " << time << " years\n\n"
 		<< "FUTURE VALUE  = " << presentValue << " * ( 1 + " << rate << " ) ^ " << time << "\n\n"
 		<< "FUTURE VALUE  = $" << std::showpoint << futureValue(presentValue, rate, time) << "\n\n";
+
+	std::cout << "====================================\n\n";
+}
+
+int main(int argc, char *argv[])
+{
+	sumDemo();
+	futureValueDemo();
 
 	return 0;
 }
