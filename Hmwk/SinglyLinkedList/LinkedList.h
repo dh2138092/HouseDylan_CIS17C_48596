@@ -12,6 +12,7 @@ class LinkedList
 {
 public:
 	LinkedList();
+	LinkedList(const LinkedList &);
 	~LinkedList();
 
 	int first();

@@ -11,6 +11,11 @@ LinkedList::LinkedList()
 	head = tail = NULL;
 }
 
+LinkedList::LinkedList(const LinkedList &o)
+{
+
+}
+
 LinkedList::~LinkedList()
 {
 	Node *p;
