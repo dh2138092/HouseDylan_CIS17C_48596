@@ -2,7 +2,7 @@ This is a movie rental store management system.
 
 The system stores a database of available movies and active customers and lets you perform a number of functions.
 
-NOTE: The "database" is hardcoded. I ran out of time and did not implement a real database, so the experience is not seamless when restarting the application.
+NOTE: The "database" is hardcoded. I ran out of time and didn't implement a real database, so the experience is not seamless when restarting the application; added information is not stored.
 
 With this program you can:
 
@@ -33,3 +33,6 @@ The sets store the movies and customers. I chose a set because a set does not st
 The iterator is used to iterate through the sets to print out the movie and customer data, when told to. This is done in the printInfo() functions in Movie and Customer classes. StoreManager also uses iterators to find a movie or customer by id by iterating through their respective sets.
 
 The sort function sorts the set of movies and customers alphabetically in both the StoreManager and Customer classes as they are added to their respective sets. When you print the inventory or customers, you'll see that they are sorted alphabetically.
+
+
+If you use the Check-In or Check-Out function from the program's main menu, try printing out the movie inventory or customer information after to see the changes reflected in the "database". Specifically, the movie "In Stock" count will change, and the customer's set of "Checked-Out" movies will change, so long as you enter valid information.
