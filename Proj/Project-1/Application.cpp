@@ -40,6 +40,10 @@ bool Application::initialize()
 	KillBill = new Movie("Kill Bill Vol. 1", "Action", 2004, 190, 100001, 5, 5);
 	Annie = new Movie("Annie", "Family", 1982, 127, 22582, 15, 5);
 	Interstellar = new Movie("Interstellar", "Adventure", 2014, 169, 96232, 20, 17);
+	Shawshank = new Movie("The Shawshank Redemption", "Crime Drama", 1994, 142, 56322, 5, 3);
+	Godfather = new Movie("The Godfather", "Crime Drama", 1972, 175, 35252, 6, 18);
+	Ikiru = new Movie("Ikiru", "Drama", 1956, 143, 64293, 5, 3);
+
 
 	customer01 = new Customer("Dylan House", 10001);
 	customer02 = new Customer("Susan House", 10002);
@@ -47,9 +51,16 @@ bool Application::initialize()
 	store.addToInventory(KillBill);
 	store.addToInventory(Annie);
 	store.addToInventory(Interstellar);
+	store.addToInventory(Shawshank);
+	store.addToInventory(Godfather);
+	store.addToInventory(Ikiru);
 
 	store.addCustomer(customer01);
 	store.addCustomer(customer02);
+
+	customer01->addMovie(Interstellar);
+	customer02->addMovie(Annie);
+	customer02->addMovie(Ikiru);
 
 	return true;
 }
@@ -94,6 +105,9 @@ void Application::cleanup()
 	delete KillBill;
 	delete Annie;
 	delete Interstellar;
+	delete Shawshank;
+	delete Godfather;
+	delete Ikiru;
 	delete customer01;
 	delete customer02;
 }

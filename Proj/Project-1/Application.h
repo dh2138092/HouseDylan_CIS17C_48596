@@ -30,6 +30,9 @@ private:
 	Movie *KillBill;
 	Movie *Annie;
 	Movie *Interstellar;
+	Movie *Shawshank;
+	Movie *Godfather;
+	Movie *Ikiru;
 	Customer *customer01;
 	Customer *customer02;
 };

@@ -66,34 +66,6 @@ Customer* StoreManager::findCustomer(int id)
 	return NULL;
 }
 
-/*
-bool StoreManager::checkIn(Customer *customer, Movie *movie)
-{
-	customer->removeMovie(movie);
-	movie->setInCount(movie->getInCount() + 1);
-	movie->setOutCount(movie->getOutCount() - 1);
-	return true;
-}
-
-
-bool StoreManager::checkOut(Customer *customer, Movie *movie)
-{
-	if (movie->getOutCount() == movie->getStockCount())
-	{
-		std::cout << movie->getTitle() << " is out of stock.\n"
-			      << "Cannot add to customer # " << customer->getId() << "\n\n";
-		return false;
-	}
-	else
-	{
-		customer->addMovie(movie);
-		movie->setInCount(movie->getInCount() - 1);
-		movie->setOutCount(movie->getOutCount() + 1);
-		return true;
-	}
-}
-*/
-
 bool StoreManager::checkIn(int customerId, int movieId)
 {
 	Customer *customer = findCustomer(customerId);
@@ -121,7 +93,7 @@ bool StoreManager::checkIn(int customerId, int movieId)
 		}
 	}
 
-	std::cout << "That movie was not found in customer data\n\n";
+	std::cout << "That movie was not found in customer's profile.\n\n";
 
 	return false;
 	

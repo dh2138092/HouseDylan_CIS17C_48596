@@ -95,5 +95,5 @@ void Movie::printInfo() const
 
 bool Movie::operator<(const Movie &m) const
 {
-	return id < m.getId();
+	return title < m.getTitle();
 }

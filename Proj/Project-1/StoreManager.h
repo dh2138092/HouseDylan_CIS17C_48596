@@ -23,8 +23,6 @@ public:
 	bool removeCustomer(Customer *c);
 	Customer* findCustomer(int id);
 
-	//bool checkIn(Customer *c, Movie *m);
-	//bool checkOut(Customer *c, Movie *m);
 	bool checkIn(int customerId, int movieId);
 	bool checkOut(int customerId, int movieId);
 
