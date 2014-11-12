@@ -17,12 +17,12 @@ Customer::~Customer()
 
 }
 
-void Customer::addMovie(Movie m)
+void Customer::addMovie(Movie *m)
 {
 	movies.insert(m);
 }
 
-void Customer::removeMovie(Movie m)
+void Customer::removeMovie(Movie *m)
 {
 	movies.erase(movies.find(m));
 }
@@ -37,9 +37,22 @@ int Customer::getId() const
 	return id;
 }
 
-std::set<Movie> Customer::getMovies() const
+std::set<Movie *> Customer::getMovies() const
 {
 	return movies;
+}
+
+void Customer::printInfo() const
+{
+	std::cout << "Name: " << name << "  . . .  ID#: " << id << '\n'
+		<< "Movies checked-out:\n";
+
+	for (std::set<Movie *>::iterator it = movies.begin(); it != movies.end(); ++it)
+	{
+		std::cout << (*it)->getTitle() << '\n';
+	}
+
+	std::cout << '\n';
 }
 
 bool Customer::operator<(const Customer &c) const

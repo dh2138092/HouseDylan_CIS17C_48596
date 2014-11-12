@@ -12,23 +12,23 @@ public:
 	StoreManager();
 	~StoreManager();
 
-	std::set<Movie> getInventory() const;
+	std::set<Movie *> getInventory() const;
+	std::set<Customer *> getCustomers() const;
 
-	bool addToInventory(Movie m);
-	bool removeFromInventory(Movie m);
+	bool addToInventory(Movie *m);
+	bool removeFromInventory(Movie *m);
+	Movie* findMovie(int id);
 
-	bool addCustomer(Customer c);
-	bool removeCustomer(Customer c);
+	bool addCustomer(Customer *c);
+	bool removeCustomer(Customer *c);
+	Customer* findCustomer(int id);
 
-	bool checkIn(Customer c, Movie m);
-	bool checkOut(Customer c, Movie m);
-
-	void printInventory() const;
-	void printCustomers() const;
+	bool checkIn(Customer *c, Movie *m);
+	bool checkOut(Customer *c, Movie *m);
 
 private:
-	std::set<Movie> inventory;
-	std::set<Customer> customers;
+	std::set<Movie *> inventory;
+	std::set<Customer *> customers;
 };
 
 #endif

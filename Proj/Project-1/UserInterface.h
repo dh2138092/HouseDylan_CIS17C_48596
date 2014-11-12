@@ -11,11 +11,19 @@ public:
 	UserInterface();
 	~UserInterface();
 
-	void printInventory(StoreManager m) const;
-	void printCustomers() const;
+	void displayMainMenu();
+	void printInventory(StoreManager store) const;
+	void printCustomers(StoreManager store) const;
+	void printMovie(StoreManager store) const;
+	void printCustomer(StoreManager store) const;
+	void displayCheckOut() const;
+	void displayCheckIn() const;
+	void printOverdue() const;
 
-	void printMovie(Movie m) const;
-	void printCustomer(Customer c) const;
+	int getMenuSelection();
+
+private:
+	int menuSelection;
 };
 
 #endif

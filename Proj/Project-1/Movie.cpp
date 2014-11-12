@@ -88,7 +88,7 @@ void Movie::printInfo() const
 	     	  << "Genre:        " << genre << '\n'
 		      << "Length:       " << length << " minutes\n"
 		      << "ID#:          " << id << '\n'
-		      << "In Stock:     " << outCount << '\n'
+		      << "In Stock:     " << inCount << '\n'
 		      << "Total Stock:  " << stockCount << "\n\n"
 		      << "--------------\n\n";
 }

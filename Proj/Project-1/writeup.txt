@@ -1,0 +1,35 @@
+This is a movie rental store management system.
+
+The system stores a database of available movies and active customers and lets you perform a number of functions.
+
+NOTE: The "database" is hardcoded. I ran out of time and did not implement a real database, so the experience is not seamless when restarting the application.
+
+With this program you can:
+
+  Print the total movie inventory.
+  Print all customers.
+  Print individual movies.
+  Print individual customers.
+  Check-out a movie to a customer.
+  Check-in a movie from a customer.
+
+To demonstrate the Standard Template Library, I have implemented a few of its data structures and algorithms.
+
+set
+iterator
+sort()
+
+The StoreManager class:
+	set<Movie> inventory
+	set<Customer> customers
+	sort()
+
+The Customer class:
+	set<Movie> movies
+	sort()
+
+The sets store the movies and customers. I chose a set because a set does not store a value/object more than once. This is good because I don't need more than one of the same movie or customer.
+
+The iterator is used to iterate through the sets to print out the movie and customer data, when told to. This is done in the printInfo() functions in Movie and Customer classes. StoreManager also uses iterators to find a movie or customer by id by iterating through their respective sets.
+
+The sort function sorts the set of movies and customers alphabetically in both the StoreManager and Customer classes as they are added to their respective sets. When you print the inventory or customers, you'll see that they are sorted alphabetically.

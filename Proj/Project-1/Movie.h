@@ -7,7 +7,7 @@ class Movie
 {
 public:
 	Movie();
-	Movie(char *t, char* g, int r, int l, int i, int a, int b);
+	Movie(char *title, char* genre, int releaseDate, int length, int id, int inCount, int outCount);
 	~Movie();
 
 	char* getTitle() const;
