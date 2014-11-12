@@ -66,6 +66,7 @@ Customer* StoreManager::findCustomer(int id)
 	return NULL;
 }
 
+/*
 bool StoreManager::checkIn(Customer *customer, Movie *movie)
 {
 	customer->removeMovie(movie);
@@ -73,6 +74,7 @@ bool StoreManager::checkIn(Customer *customer, Movie *movie)
 	movie->setOutCount(movie->getOutCount() - 1);
 	return true;
 }
+
 
 bool StoreManager::checkOut(Customer *customer, Movie *movie)
 {
@@ -88,5 +90,70 @@ bool StoreManager::checkOut(Customer *customer, Movie *movie)
 		movie->setInCount(movie->getInCount() - 1);
 		movie->setOutCount(movie->getOutCount() + 1);
 		return true;
+	}
+}
+*/
+
+bool StoreManager::checkIn(int customerId, int movieId)
+{
+	Customer *customer = findCustomer(customerId);
+	Movie *movie = findMovie(movieId);
+
+	if (customer == NULL)
+		std::cout << "Customer not found.\n\n";
+
+	if (movie == NULL)
+		std::cout << "Movie not found.\n\n";
+
+	if (customer == NULL || movie == NULL)
+		return false;
+
+	std::set<Movie *> movies = customer->getMovies();
+
+	for (std::set<Movie *>::iterator it = movies.begin(); it != movies.end(); ++it)
+	{
+		if (*it == movie)
+		{
+			customer->removeMovie(movie);
+			movie->setInCount(movie->getInCount() + 1);
+			movie->setOutCount(movie->getOutCount() - 1);
+			return true;
+		}
+	}
+
+	std::cout << "That movie was not found in customer data\n\n";
+
+	return false;
+	
+}
+
+bool StoreManager::checkOut(int customerId, int movieId)
+{
+	Customer *customer = findCustomer(customerId);
+	Movie *movie = findMovie(movieId);
+
+	if (customer == NULL)
+		std::cout << "Customer not found.\n\n";
+
+	if (movie == NULL)
+		std::cout << "Movie not found.\n\n";
+
+	if (customer == NULL || movie == NULL)
+		return false;
+	else
+	{
+		if (movie->getOutCount() == movie->getStockCount())
+		{
+			std::cout << movie->getTitle() << " is out of stock.\n"
+				<< "Cannot add to customer # " << customer->getId() << "\n\n";
+			return false;
+		}
+		else
+		{
+			customer->addMovie(movie);
+			movie->setInCount(movie->getInCount() - 1);
+			movie->setOutCount(movie->getOutCount() + 1);
+			return true;
+		}
 	}
 }

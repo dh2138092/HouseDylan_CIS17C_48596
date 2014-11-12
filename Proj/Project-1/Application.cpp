@@ -74,13 +74,10 @@ bool Application::update()
 		interface.printCustomer(store);
 		break;
 	case 5:
-		interface.displayCheckOut();
+		interface.displayCheckOut(store);
 		break;
 	case 6:
-		interface.displayCheckIn();
-		break;
-	case 7:
-		interface.printOverdue();
+		interface.displayCheckIn(store);
 		break;
 	case 0:
 		exit();

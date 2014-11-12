@@ -16,9 +16,8 @@ public:
 	void printCustomers(StoreManager store) const;
 	void printMovie(StoreManager store) const;
 	void printCustomer(StoreManager store) const;
-	void displayCheckOut() const;
-	void displayCheckIn() const;
-	void printOverdue() const;
+	void displayCheckOut(StoreManager store) const;
+	void displayCheckIn(StoreManager store) const;
 
 	int getMenuSelection();
 

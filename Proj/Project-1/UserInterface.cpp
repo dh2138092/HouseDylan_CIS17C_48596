@@ -16,9 +16,8 @@ void UserInterface::displayMainMenu()
 		      << "2. All Customers\n"
 		      << "3. Lookup Movie\n"
 		      << "4. Lookup Customer\n"
-		      << "5. Check - Out Movie\n"
-		      << "6. Check - In Movie\n"
-		      << "7. Overdue Returns\n"
+		      << "5. Check-Out Movie\n"
+		      << "6. Check-In Movie\n"
 		      << "0. Exit\n\n"
               << "       Option : ";
 }
@@ -75,19 +74,28 @@ void UserInterface::printCustomer(StoreManager store) const
 		std::cout << "Customer not found.\n\n";
 }
 
-void UserInterface::displayCheckOut() const
+void UserInterface::displayCheckOut(StoreManager store) const
 {
+	int customerId = 0;
+	int movieId = 0;
+	std::cout << "Customer ID# : ";
+	std::cin >> customerId;
+	std::cout << "Movie ID# : ";
+	std::cin >> movieId;
 
+	store.checkOut(customerId, movieId);
 }
 
-void UserInterface::displayCheckIn() const
+void UserInterface::displayCheckIn(StoreManager store) const
 {
+	int customerId = 0;
+	int movieId = 0;
+	std::cout << "Customer ID# : ";
+	std::cin >> customerId;
+	std::cout << "Movie ID# : ";
+	std::cin >> movieId;
 
-}
-
-void UserInterface::printOverdue() const
-{
-
+	store.checkIn(customerId, movieId);
 }
 
 int UserInterface::getMenuSelection()
