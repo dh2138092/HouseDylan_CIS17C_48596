@@ -3,74 +3,143 @@
 #include <string>
 #include <ctime>
 
-template <class T>
-void bubbleSort(T arr[], int n)
+/*
+	selectionsort pg. 495
+	buublesort pg. 497
+	quicksort pg. 514
+	heapsort pg. 508 & 272
+
+	LEFT TO DO:
+	mergesort pg. 518
+*/
+
+template<class T>
+void heapsort(T data[], int n) 
 {
-	bool swapped = true;
-	int j = 1;
-	T tmp;
+	for (int i = n / 2 - 1; i >= 0; --i)
+		moveDown(data, i, n - 1);
 
-	while (swapped)  
+	for (int i = n - 1; i >= 1; --i) 
 	{
-		swapped = false;
-		j++;
+		swap(data[0], data[i]);
+		moveDown(data, 0, i - 1);
+	}
+}
 
-		for (int i = 0; i < n - j; i++)
+template<class T>
+void moveDown(T data[], int first, int last) 
+{
+	int largest = 2 * first + 1;
+
+	while (largest <= last) 
+	{
+		if (largest < last && data[largest] < data[largest + 1])
+			largest++;
+
+		if (data[first] < data[largest]) 
 		{
-			if (arr[i] > arr[i + 1])
-			{
-				tmp = arr[i];
-				arr[i] = arr[i + 1];
-				arr[i + 1] = tmp;
+			swap(data[first], data[largest]);
+			first = largest;
+			largest = 2 * first + 1;
+		}
+		else 
+			largest = last + 1;
+	} 
+}
 
-				swapped = true;
+template<class T>
+void quicksort(T data[], int first, int last) 
+{
+	int lower = first + 1, upper = last;
+
+	swap(data[first], data[(first + last) / 2]);
+
+	T bound = data[first];
+
+	while (lower <= upper) 
+	{
+		while (bound > data[lower])
+			lower++;
+
+		while (bound < data[upper])
+			upper--;
+
+		if (lower < upper)
+			swap(data[lower++], data[upper--]);
+		else lower++;
+	}
+
+	swap(data[upper], data[first]);
+
+	if (first < upper - 1)
+		quicksort(data, first, upper - 1);
+
+	if (upper + 1 < last)
+		quicksort(data, upper + 1, last);
+}
+
+template<class T>
+void quicksort(T data[], int n) 
+{
+	int i, max;
+
+	if (n < 2)
+		return;
+
+	for (i = 1, max = 0; i < n; i++)
+	{
+		if (data[max] < data[i])
+			max = i;
+	}
+	
+	swap(data[n - 1], data[max])
+	
+	quicksort(data, 0, n - 2);
+}
+
+template<class T>
+void bubblesort(T data[], const int n) 
+{
+	bool again = true;
+
+	for (int i = 0; i < n - 1 && again; i++)
+	{
+		for (int j = n - 1, again = false; j > i; --j)
+		{
+			if (data[j] < data[j - 1])
+			{
+				swap(data[j], data[j - 1]);
+				again = true;
 			}
 		}
 	}
 }
 
-template <class T>
-void selectSort(T arr[], int n)
+template<class T>
+void selectionsort(T data[], int n) 
 {
-	int pos_min;
-	T temp;
-
-	for (int i = 0; i < n - 1; i++)
+	for (int i = 0, j, least; i < n - 1; i++) 
 	{
-		pos_min = i;
-
-		for (int j = i + 1; j < n; j++)
+		for (j = i + 1, least = i; j < n; j++)
 		{
-			if (arr[j] < arr[pos_min])
-				pos_min = j;
+			if (data[j] < data[least])
+			{
+				least = j;
+			}
 		}
 
-		if (pos_min != i)
-		{
-			temp = arr[i];
-			arr[i] = arr[pos_min];
-			arr[pos_min] = temp;
-		}
+		swap(data[least], data[i]);
 	}
 }
 
 int main(int argv, char *argc[])
 {
-	
 	srand((unsigned int)time(0));
-	clock_t start, finish = 0;
-	int searchResult = 0;
-	int const numOfCharacters = 8;
-	int const SIZE = 20;
+	int const numOfCharacters = 4;
+	int const SIZE = 10;
 	std::string *sArray = new std::string[SIZE];
-	std::string sComparable = "";
 
-	for (int i = 0; i < numOfCharacters; i++)
-	{
-		char mChar = 'A' + rand() % 26;
-		sComparable += mChar;
-	}
-
+	// Create an array of random strings
 	for (int i = 0; i < SIZE; i++)
 	{
 		for (int j = 0; j < numOfCharacters; j++)
@@ -80,15 +149,24 @@ int main(int argv, char *argc[])
 		}
 	}
 
+	std::cout << "Unsorted array:\n";
+
+	// Print unordered array of strings
 	for (int i = 0; i < SIZE; i++)
 	{
 		std::cout << sArray[i] << '\n';
 	}
 
-	std::cout << '\n';
+	// Sort array
+	//selectionsort(sArray, SIZE);
+	//bubblesort(sArray, SIZE);
+	//quicksort(sArray, SIZE);
+	heapsort(sArray, SIZE);
+	//mergesort(sArray, SIZE);
 
-	bubbleSort(sArray, SIZE + 1);
+	std::cout << "\nSorted array:\n";
 
+	// Print ordered array of strings
 	for (int i = 0; i < SIZE; i++)
 	{
 		std::cout << sArray[i] << '\n';
@@ -97,7 +175,6 @@ int main(int argv, char *argc[])
 	std::cout << '\n';
 
 	delete [] sArray;
-	
 
 	return 0;
 }
