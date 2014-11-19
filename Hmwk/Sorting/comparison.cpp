@@ -5,7 +5,8 @@
 
 /*
 	selectionsort pg. 495
-	buublesort pg. 497
+	bubblesort pg. 497
+	
 	quicksort pg. 514
 	heapsort pg. 508 & 272
 
@@ -13,7 +14,45 @@
 	mergesort pg. 518
 */
 
-template<class T>
+template <class T>
+void mergesort(T data[], int first, int last)
+{
+	if (first < last)
+	{
+		int mid = (first + last) / 2;
+		mergesort(data, first, mid);
+		mergesort(data, mid + 1, last);
+		merge(data, first, last);
+	}
+}
+
+template <class T>
+void merge(T array1[], int first, int last)
+{
+	T temp[];
+	int mid = (first + last) / 2;
+	int i1 = 0;
+	int i2 = first;
+	int i3 = mid + 1;
+
+	while (first <= mid && last >= mid)
+	{
+		if (array1[i2] < array1[i3])
+		{
+			temp[i1++] = array1[i2++];
+		}
+		else
+		{
+			temp[i1++] = array1[i3++];
+		}
+	}
+
+	// INCOMPLETE
+	// Read page 518 to read about implementation
+
+}
+
+template <class T>
 void heapsort(T data[], int n) 
 {
 	for (int i = n / 2 - 1; i >= 0; --i)
@@ -26,7 +65,7 @@ void heapsort(T data[], int n)
 	}
 }
 
-template<class T>
+template <class T>
 void moveDown(T data[], int first, int last) 
 {
 	int largest = 2 * first + 1;
@@ -78,7 +117,7 @@ void quicksort(T data[], int first, int last)
 		quicksort(data, upper + 1, last);
 }
 
-template<class T>
+template <class T>
 void quicksort(T data[], int n) 
 {
 	int i, max;
@@ -97,7 +136,7 @@ void quicksort(T data[], int n)
 	quicksort(data, 0, n - 2);
 }
 
-template<class T>
+template <class T>
 void bubblesort(T data[], const int n) 
 {
 	bool again = true;
@@ -115,7 +154,7 @@ void bubblesort(T data[], const int n)
 	}
 }
 
-template<class T>
+template <class T>
 void selectionsort(T data[], int n) 
 {
 	for (int i = 0, j, least; i < n - 1; i++) 
