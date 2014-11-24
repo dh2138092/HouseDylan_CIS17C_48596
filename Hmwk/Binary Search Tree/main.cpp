@@ -7,40 +7,72 @@
 int main(int argc, char* argv[])
 {
 	BST<int> *tree = new BST<int>();
+	BST<int> *treeb = new BST<int>();
+	BST<int> *treei = new BST<int>();
 
 	srand((unsigned int)time(0));
 	int num = 0;
 	int const SIZE = 10;
+	int firstHalf = 5;
+	int secondHalf = 10;
+	int mArray[SIZE] = { 0 };
 
-	for (int i = 1; i <= SIZE; i++)
+
+	////////////////////////////////////////////
+	// DEMONSTRATE INSERT() WITHOUT BALANCING //
+	////////////////////////////////////////////
+
+	// Fill array with random data and insert()
+	// this data into tree
+	for (int i = 0; i < SIZE; i++)
 	{
 		num = rand() % 15;
+		mArray[i] = num;
 		tree->insert(num);
 	}
 
-	tree->preorder();
-	std::cout << "\n\n";
-	tree->postorder();
-	std::cout << "\n\n";
-	tree->inorder();
+	std::cout << "\nUNBALANCED TREE\n-----------------\n";
+	std::cout << "Preorder:   "; tree->preorder();
+	std::cout << "\nPostorder:  "; tree->postorder();
+	std::cout << "\nInorder:    "; tree->inorder();
 	std::cout << "\n\n";
 
-	for (int i = 1; i <= SIZE; i++)
+	
+	///////////////////////////////////
+	//     DEMONSTRATE BALANCE()     //
+	///////////////////////////////////
+
+	// First clear tree of all data to start fresh
+	// Then balance() the tree with the data
+	tree->clear();
+	tree->balance(mArray, 0, SIZE - 1);
+
+	std::cout << "\nBALANCED TREE\n-----------------\n";
+	std::cout << "Preorder:   "; tree->preorder();
+	std::cout << "\nPostorder:  "; tree->postorder();
+	std::cout << "\nInorder:    "; tree->inorder();
+	std::cout << "\n\n";
+
+
+	//////////////////////////////////
+	//     DEMONSTRATE DELETE()     //
+	//////////////////////////////////
+
+	std::cout << "\n====================\nDELETION DEMO\n====================\n";
+
+	for (int i = 0; i < 5; i++)
 	{
 		num = rand() % 15;
-		std::cout << "Attempting to remove " << num << " from tree\n";
+		std::cout << "-----------------\nAttemping to delete a " << num << " from the tree...\n";
 		tree->findAndDeleteByMerging(num);
-		std::cout << '\n';
+		std::cout << "\nPreorder:   "; tree->preorder();
+		std::cout << "\nPostorder:  "; tree->postorder();
+		std::cout << "\nInorder:    "; tree->inorder();
+		std::cout << "\n\n";
 	}
-	
-	std::cout << "\n\n";
-	tree->preorder();
-	std::cout << "\n\n";
-	tree->postorder();
-	std::cout << "\n\n";
-	tree->inorder();
-	std::cout << "\n\n";
-	
+
+
+	// We're done
 	delete tree;
 
 	return 0;

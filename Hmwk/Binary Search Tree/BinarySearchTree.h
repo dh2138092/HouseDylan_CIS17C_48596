@@ -117,16 +117,15 @@ protected:
 template <class T>
 void BST<T>::clear(BSTNode<T> *p)
 {
-	if (root != 0)
-	{
-		clear(root->left);
-		clear(root->right);
-	}
+	if (p == 0)
+		return;
 
-	if (root->left != 0)
-		root->left = 0;
-	if (root->right != 0)
-		root->right = 0;
+	if (p->left != 0)
+		clear(p->left);
+	if (p->right != 0)
+		clear(p->right);
+
+	delete p;
 }
 
 template <class T>
@@ -140,7 +139,7 @@ T* BST<T>::search(BSTNode<T> *p, const T &el) const
 		else
 			p = p->right;
 
-		return 0;
+	return 0;
 }
 
 template <class T>
