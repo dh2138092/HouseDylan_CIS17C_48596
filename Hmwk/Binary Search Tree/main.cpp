@@ -7,8 +7,6 @@
 int main(int argc, char* argv[])
 {
 	BST<int> *tree = new BST<int>();
-	BST<int> *treeb = new BST<int>();
-	BST<int> *treei = new BST<int>();
 
 	srand((unsigned int)time(0));
 	int num = 0;
@@ -58,7 +56,7 @@ int main(int argc, char* argv[])
 	//     DEMONSTRATE DELETE()     //
 	//////////////////////////////////
 
-	std::cout << "\n====================\nDELETION DEMO\n====================\n";
+	std::cout << "\n====================\n   DELETION DEMO\n====================\n";
 
 	for (int i = 0; i < 5; i++)
 	{
