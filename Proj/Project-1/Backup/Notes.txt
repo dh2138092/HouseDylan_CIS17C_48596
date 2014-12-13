@@ -1,0 +1,38 @@
+1. Total Inventory
+2. All Customers
+3. Lookup Movie
+4. Lookup Customer
+5. Check-Out Movie
+6. Check-In Movie
+7. Overdue Returns
+8. Exit
+
+Option:  
+
+
+printMainMenu()
+getMenuChoice()
+printInventory()
+printCustomers()
+printMovie()
+printCustomer()
+printCheckOut()
+printCheckIn()
+printOverdue()
+
+
+
+Application
+
+	while(running)
+		displayMainMenu()
+			getMenuSelection()
+
+		case 1: printInventory()
+		case 2: printCustomers()
+		case 3: printMovie()
+		case 4: printCustomer()
+		case 5: displayCheckOut()
+		case 6: displayCheckIn()
+		case 7: printOverdues()
+		case 8: exit()

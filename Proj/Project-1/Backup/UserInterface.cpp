@@ -1,6 +1,5 @@
 #include "UserInterface.h"
 
-
 UserInterface::UserInterface()
 {
 
@@ -25,9 +24,13 @@ void UserInterface::displayMainMenu()
 
 void UserInterface::printInventory(StoreManager store) const
 {
-	BST<Movie *> inventory = store.getInventory();
+	std::set<Movie *> inventory = store.getInventory();
 
-	inventory.inorder();
+	std::cout << "             INVENTORY REPORT\n"
+		      << "===========================================\n\n";
+
+	for (std::set<Movie *>::iterator it = inventory.begin(); it != inventory.end(); ++it)
+		(*it)->printInfo();
 }
 
 void UserInterface::printCustomers(StoreManager store) const

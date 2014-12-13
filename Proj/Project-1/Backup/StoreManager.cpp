@@ -10,7 +10,7 @@ StoreManager::~StoreManager()
 
 }
 
-BST<Movie *> StoreManager::getInventory() const
+std::set<Movie *> StoreManager::getInventory() const
 {
 	return inventory;
 }
@@ -28,16 +28,17 @@ bool StoreManager::addToInventory(Movie *m)
 
 bool StoreManager::removeFromInventory(Movie *m)
 {
-	inventory.findAndDeleteByMerging(m);
-	//inventory.erase(inventory.find(m));
+	inventory.erase(inventory.find(m));
 	return true;
 }
 
 Movie* StoreManager::findMovie(int id)
 {
-	//inventory.search(m);
-
-		
+	for (std::set<Movie *>::iterator it = inventory.begin(); it != inventory.end(); ++it)
+	{
+		if (id == (*it)->getId())
+			return *it;
+	}
 
 	return NULL;
 }
