@@ -48,7 +48,7 @@ void HashTable::printData()
 	{
 		if (!table[i].empty())
 		{
-			for (std::list<std::string>::iterator it = table[i].begin(); it != table[i].end(); ++it)
+			for (std::list<std::string>::const_iterator it = table[i].begin(); it != table[i].end(); ++it)
 				std::cout << *it << '\n';
 		}
 	}
