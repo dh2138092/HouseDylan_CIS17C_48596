@@ -37,6 +37,8 @@ bool Application::initialize()
 	// you restarted the application, the information was just as it was
 	// when you left.
 
+	std::cout << "Welcome to Flicks-R-Us!\n\n";
+
 	store = StoreManager(4);
 
 	KillBill = new Movie("Kill Bill Vol. 1", "Action", 2004, 190, 100001, 5, 5);

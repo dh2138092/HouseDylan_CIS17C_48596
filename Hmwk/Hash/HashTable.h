@@ -5,13 +5,13 @@
 
 const int TABLE_SIZE = 128;
 
-class HashMap 
+class HashTable 
 {
 private:
       LinkedHashEntry **table;
 
 public:
-	HashMap()
+	HashTable()
 	{
 		table = new LinkedHashEntry*[TABLE_SIZE];
 
@@ -92,7 +92,7 @@ public:
 		}
 	}
 
-	~HashMap() 
+	~HashTable() 
 	{
 		for (int i = 0; i < TABLE_SIZE; i++)
 			if (table[i] != NULL) 

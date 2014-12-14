@@ -45,8 +45,10 @@ void quickSort(std::string *arr, int left, int right)
 	{
 		while (arr[i] < pivot)
 			i++;
+
 		while (arr[j] > pivot)
 			j--;
+
 		if (i <= j) 
 		{
 			tmp = arr[i];
@@ -70,8 +72,8 @@ int main(int argc, char *argv[])
 	clock_t start, finish = 0;
 	int searchResult = 0;
 
-	int const numOfCharacters = 20;
-	int const SIZE = 10000;
+	int const numOfCharacters = 3;
+	int const SIZE = 1000000;
 	std::string *sArray = new std::string[SIZE];
 	std::string sComparable = "";
 
