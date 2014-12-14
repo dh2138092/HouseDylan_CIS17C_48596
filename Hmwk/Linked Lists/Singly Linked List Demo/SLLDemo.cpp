@@ -84,6 +84,8 @@ int main(int argc, char **argv)
 	
 	} while (quit != true);
 
+	std::cout << '\n';
+
 	return 0;
 }
 

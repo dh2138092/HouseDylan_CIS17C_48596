@@ -3,7 +3,7 @@
 
 #include "LinkedHashEntry.h"
 
-const int TABLE_SIZE = 128;
+const int TABLE_SIZE = 1010081;
 
 class HashTable 
 {
@@ -17,6 +17,25 @@ public:
 
 		for (int i = 0; i < TABLE_SIZE; i++)
 			table[i] = NULL;
+	}
+
+	~HashTable()
+	{
+		for (int i = 0; i < TABLE_SIZE; i++)
+			if (table[i] != NULL)
+			{
+				LinkedHashEntry *prevEntry = NULL;
+				LinkedHashEntry *entry = table[i];
+
+				while (entry != NULL)
+				{
+					prevEntry = entry;
+					entry = entry->getNext();
+					delete prevEntry;
+				}
+			}
+
+		delete[] table;
 	}
 
 	int get(int key) 
@@ -90,25 +109,6 @@ public:
 				}
 			}
 		}
-	}
-
-	~HashTable() 
-	{
-		for (int i = 0; i < TABLE_SIZE; i++)
-			if (table[i] != NULL) 
-			{
-				LinkedHashEntry *prevEntry = NULL;
-				LinkedHashEntry *entry = table[i];
-
-				while (entry != NULL) 
-				{
-					prevEntry = entry;
-					entry = entry->getNext();
-					delete prevEntry;
-				}
-			}
-
-		delete[] table;
 	}
 };
 
