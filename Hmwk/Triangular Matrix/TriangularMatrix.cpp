@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
 {
 	srand((unsigned int)time(0));
 
+	std::cout << rand() << std::endl;
+
 	// Initialize the dimensions of the 1-d array and triangular matrix
 	int rows = 10;
 	int columnsPerRow = 10;

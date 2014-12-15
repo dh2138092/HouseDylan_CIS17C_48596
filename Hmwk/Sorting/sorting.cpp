@@ -3,17 +3,6 @@
 #include <string>
 #include <ctime>
 
-/*
-	selectionsort pg. 495
-	bubblesort pg. 497
-	
-	quicksort pg. 514
-	heapsort pg. 508 & 272
-
-	LEFT TO DO:
-	mergesort pg. 518
-*/
-
 template <class T>
 void mergesort(T data[], int first, int last)
 {

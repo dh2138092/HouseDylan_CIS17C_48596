@@ -1,59 +1,60 @@
 #include <stdlib.h>
 #include <ctime>
 #include <iostream>
-#include <string>
-#include <algorithm>
 
 #include "HashTable.h"
 
-int linearSearch(unsigned short int integers[], int const SIZE, unsigned short int reference)
+template <class T>
+int linearSearch(T data[], int const SIZE, T reference)
 {
 	for (int i = 0; i < SIZE; i++)
-		if (reference == integers[i])
+		if (reference == data[i])
 			return i;
-	
+
 	return -1;
 }
 
-int binarySearch(unsigned short int integers[], int const SIZE, unsigned short int reference)
+template <class T>
+int binarySearch(T data[], int const SIZE, T reference)
 {
 	int low = 0;
 	int high = SIZE - 1;
 
-	while (low <= high) 
+	while (low <= high)
 	{
 		int mid = (low + high) / 2;
-		if (integers[mid] > reference)
+		if (data[mid] > reference)
 			high = mid - 1;
-		else if (integers[mid] < reference)
+		else if (data[mid] < reference)
 			low = mid + 1;
 		else
 			return mid;
 	}
 
-	return -1;  
+	return -1;
 }
 
-void quickSort(unsigned short int integers[], int left, int right) 
+template <class T>
+void quickSort(T data[], int left, int right)
 {
 	int i = left, j = right;
-	unsigned short int tmp;
-	unsigned short int pivot = integers[(left + right) / 2];
+	T tmp;
+	T pivot = data[(left + right) / 2];
 
 	/* partition */
-	while (i <= j) 
+	while (i <= j)
 	{
-		while (integers[i] < pivot)
+		while (data[i] < pivot)
 			i++;
 
-		while (integers[j] > pivot)
+		while (data[j] > pivot)
 			j--;
 
-		if (i <= j) 
+		if (i <= j)
 		{
-			tmp = integers[i];
-			integers[i] = integers[j];
-			integers[j] = tmp;
+			tmp = data[i];
+			data[i] = data[j];
+			data[j] = tmp;
 			i++;
 			j--;
 		}
@@ -61,22 +62,21 @@ void quickSort(unsigned short int integers[], int left, int right)
 
 	/* recursion */
 	if (left < j)
-		quickSort(integers, left, j);
+		quickSort(data, left, j);
 	if (i < right)
-		quickSort(integers, i, right);
+		quickSort(data, i, right);
 }
 
 void linearSearchDemo()
 {
 	clock_t start, finish = 0;
-	int const SIZE = 1000000;
-	int searchResult = 0;
-	unsigned short int *integers = new unsigned short int[SIZE];
-	unsigned short int reference = rand() % 900000 + 100000;
+	int const SIZE = 100000000;
+	int *integers = new int[SIZE];
+	int reference = 0;
 
 	std::cout << "Reference value is " << reference << "\n\n";
 
-	
+
 	// Each element in the array is a 3-digit unsigned short integer
 	for (int i = 0; i < SIZE; i++)
 	{
@@ -84,16 +84,12 @@ void linearSearchDemo()
 	}
 
 	start = clock();
-	searchResult = linearSearch(integers, SIZE, reference);
+	linearSearch(integers, SIZE, reference);
 	finish = clock();
 
-	std::cout << "*****Total LINEAR SEARCH time: " << (double)(finish - start) / CLOCKS_PER_SEC << "s*****\n";
-
-	if (searchResult >= 0)
-		std::cout << "     Match found at index[" << searchResult << "]!\n\n";
-	else
-		std::cout << "     No match!\n\n";
-		
+	std::cout << "*****Total LINEAR SEARCH time: " 
+			  << (double)(finish - start) / CLOCKS_PER_SEC 
+			  << "s*****\n";
 
 	delete[] integers;
 }
@@ -101,16 +97,20 @@ void linearSearchDemo()
 void binarySearchDemo()
 {
 	clock_t start, finish = 0;
-	int const SIZE = 1000000;
-	int searchResult = 0;
-	unsigned short int integers[SIZE] = { 0 };
-	unsigned short int reference = rand() % 900 + 100;
+	int const SIZE = 100000000;
+	int *integers = new int[SIZE];
+	int reference = 0;
+
+	std::cout << "Reference value is " << reference << "\n\n";
+
 
 	// Each element in the array is a 3-digit unsigned short integer
 	for (int i = 0; i < SIZE; i++)
 	{
-		integers[i] = rand() % 900 + 100;
+		integers[i] = rand() % 900000 + 100000;
 	}
+
+	std::cout << "First I have to sort this data. . .\n\This may take a few seconds. . .\n";
 
 	quickSort(integers, 0, SIZE - 1);
 
@@ -118,15 +118,14 @@ void binarySearchDemo()
 			  << "Now performing BINARY SEARCH. . .\n\n";
 
 	start = clock();
-	searchResult = binarySearch(integers, SIZE, reference);
+	binarySearch(integers, SIZE, reference);
 	finish = clock();
 
-	std::cout << "*****Total BINARY SEARCH time: " << (double)(finish - start) / CLOCKS_PER_SEC << "s*****\n";
+	std::cout << "*****Total BINARY SEARCH time: " 
+			  << (double)(finish - start) / CLOCKS_PER_SEC 
+			  << "s*****\n";
 
-	if (searchResult >= 0)
-		std::cout << "     Match found at index[" << searchResult << "]!\n\n";
-	else
-		std::cout << "     No match!\n\n";
+	delete[] integers;
 }
 
 void hashTableDemo()
@@ -134,31 +133,56 @@ void hashTableDemo()
 	HashTable table;
 	clock_t start, finish = 0;
 	int const SIZE = 1000000;
-	unsigned short int integers[SIZE] = { 0 };
-	unsigned short int reference = rand() % 900 + 100;
+	int *integers = new int[SIZE];
+	int reference = 0;
 
+	std::cout << "Reference value is " << reference << "\n\n";
+	
 	// Each element in the array is a 3-digit unsigned short integer
 	for (int i = 0; i < SIZE; i++)
 	{
-		integers[i] = rand() % 900 + 100;
+		integers[i] = rand() % 900000 + 100000;
 	}
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		table.put(i, integers[i]);
+	}
+
+	start = clock();
+	table.get(reference);
+	finish = clock();
+
+	std::cout << "*****Total HASH SEARCH time: "
+		<< (double)(finish - start) / CLOCKS_PER_SEC
+		<< "s*****\n";
+
+	delete[] integers;
 }
 
-int main(int argc, char *argv[])
-{	
-	srand((unsigned int)time(0));
+int main(int argc, char** argv)
+{
+	srand(time(NULL));
 
-	std::cout << "First up is LINEAR SEARCH.\n\n";
+	std::cout << "I'm going to compare worst case scenarios\n"
+		<< "for linear search, binary search, and hash table.\n"
+		<< "Worst case meaning no match is found, so each search\n"
+		<< "function will have to run from end to end with its data set.\n"
+		<< "Data table size is 1000000 integers.\n";
+
+	std::cout << "\n===============\nFirst up is LINEAR SEARCH.\n===============\n";
 
 	linearSearchDemo();
 
-	std::cout << "Next is BINARY SEARCH.\n\n";
+	std::cout << "\n===============\nNext is BINARY SEARCH.\n===============\n";
 
-	//binarySearchDemo();
+	binarySearchDemo();
 
-	std::cout << "Last, but not least - HASH TABLE.\n\n";
+	std::cout << "\n===============\nLast, but not least - HASH TABLE.\n===============\n";
 
-	//hashTableDemo();
-	
+	hashTableDemo();
+
+	std::cout << "\n\n";
+
 	return 0;
 }

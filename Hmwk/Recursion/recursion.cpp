@@ -29,8 +29,6 @@ double futureValue(double presentValue, double rate, int time)
 
 void sumDemo()
 {
-	// Demo for RECURSIVELY calculating the sum of all
-	// elements in an array of integers.
 
 	std::cout << "Demo of recursively calculating the sum\n"
 		<< "of all integers in a given array\n\n";
