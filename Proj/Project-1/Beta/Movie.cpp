@@ -84,13 +84,13 @@ void Movie::setStockCount()
 
 void Movie::printInfo() const
 {
-	std::cout << " ID#:          " << id << '\n'
-			  << " Title:        " << title << '\n'
-	     	  << " Genre:        " << genre << '\n'
-		      << " Length:       " << length << " minutes\n"
-		      << " In Stock:     " << inCount << '\n'
-		      << " Total Stock:  " << stockCount << "\n\n"
-		      << " -----------------------------\n\n";
+	std::cout << "Title:        " << title << '\n'
+	     	  << "Genre:        " << genre << '\n'
+		      << "Length:       " << length << " minutes\n"
+		      << "ID#:          " << id << '\n'
+		      << "In Stock:     " << inCount << '\n'
+		      << "Total Stock:  " << stockCount << "\n\n"
+		      << "-----------------------------\n\n";
 }
 
 bool operator<(const Movie &a, const Movie &b)

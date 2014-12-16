@@ -39,8 +39,17 @@ bool Application::initialize()
 	Godfather = new Movie("The Godfather", "Crime Drama", 1972, 175, 5, 6, 18);
 	Ikiru = new Movie("Ikiru", "Drama", 1956, 143, 6, 5, 3);
 
-	customer01 = new Customer("Dylan House", 1);
-	customer02 = new Customer("Susan House", 2);
+	Movie testA("A", NULL, 0, 0, 1, 0, 0);
+	Movie testB("B", NULL, 0, 0, 3, 0, 0);
+	Movie testC("C", NULL, 0, 0, 5, 0, 0);
+
+	if (testC > testB)
+		std::cout << "True!\n";
+	else
+		std::cout << "False!\n";
+
+	customer01 = new Customer("Dylan House", 01);
+	customer02 = new Customer("Susan House", 02);
 
 	store->addToInventory(KillBill);
 	store->addToInventory(Annie);
@@ -67,18 +76,23 @@ bool Application::update()
 	switch (selection)
 	{
 	case 1:
+		system("cls");
 		interface->printInventory(*store);
 		break;
 	case 2:
+		system("cls");
 		interface->printMovie(*store);
 		break;
 	case 3:
+		system("cls");
 		interface->printCustomer(*store);
 		break;
 	case 4:
+		system("cls");
 		interface->displayCheckOut(*store);
 		break;
 	case 5:
+		system("cls");
 		interface->displayCheckIn(*store);
 		break;
 	case 0:

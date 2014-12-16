@@ -44,14 +44,14 @@ std::set<Movie *> Customer::getMovies() const
 
 void Customer::printInfo() const
 {
-	std::cout << "  ID#:  " << id << '\n'
-			  << " Name:  " << name << "\n\n"
-		      << " Movies checked-out:\n";
+	std::cout << "Name:  " << name << '\n'
+		      << " ID#:  " << id << "\n\n"
+		      << "Movies checked-out:\n";
 
 	for (std::set<Movie *>::iterator it = movies.begin(); it != movies.end(); ++it)
 		std::cout << "    " << (*it)->getTitle() << '\n';
 
-	std::cout << " --------------\n\n";
+	std::cout << "--------------\n\n";
 }
 
 bool Customer::operator<(const Customer &c) const

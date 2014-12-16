@@ -108,7 +108,7 @@ bool StoreManager::checkOut(int customerId, int movieId)
 		if (movie->getOutCount() == movie->getStockCount())
 		{
 			std::cout << movie->getTitle() << " is out of stock.\n"
-				<< "Cannot add to customer #" << customer->getId() << "\n\n";
+				<< "Cannot add to customer # " << customer->getId() << "\n\n";
 			return false;
 		}
 		else
