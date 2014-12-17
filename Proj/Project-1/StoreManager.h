@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <set>
+#include <list>
 #include "Movie.h"
 #include "Customer.h"
 #include "HashTable.h"

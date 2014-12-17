@@ -34,8 +34,8 @@ private:
 	Movie *Shawshank;
 	Movie *Godfather;
 	Movie *Ikiru;
-	Customer *customer01;
-	Customer *customer02;
+	Customer *Dylan;
+	Customer *Mark;
 };
 
 #endif

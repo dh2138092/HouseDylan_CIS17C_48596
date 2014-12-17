@@ -90,7 +90,7 @@ void Movie::printInfo() const
 		      << " Length:       " << length << " minutes\n"
 		      << " In Stock:     " << inCount << '\n'
 		      << " Total Stock:  " << stockCount << "\n\n"
-		      << " -----------------------------\n\n";
+		      << " -------------------------------\n\n";
 }
 
 bool operator<(const Movie &a, const Movie &b)

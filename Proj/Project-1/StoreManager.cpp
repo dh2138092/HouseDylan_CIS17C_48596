@@ -77,9 +77,9 @@ bool StoreManager::checkIn(int customerPhoneNumber, int movieId)
 	if (customer == NULL || movie == NULL)
 		return false;
 
-	std::set<Movie *> movies = customer->getMovies();
+	std::list<Movie *> movies = customer->getMovies();
 
-	for (std::set<Movie *>::iterator it = movies.begin(); it != movies.end(); ++it)
+	for (std::list<Movie *>::const_iterator it = movies.begin(); it != movies.end(); ++it)
 	{
 		if (*it == movie)
 		{

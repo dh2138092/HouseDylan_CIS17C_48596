@@ -12,9 +12,10 @@ UserInterface::~UserInterface()
 
 void UserInterface::displayMainMenu()
 {
-	std::cout << "\n 1. Display Movie Inventory\n"
-			  << " 2. Lookup Movie\n"
-			  << " 3. Lookup Customer\n"
+	std::cout << "\n -------------------------------\n"
+			  << "\n 1. Display Movie Inventory\n"
+			  << " 2. Lookup Movie\n\n"
+			  << " 3. Lookup Customer\n\n"
 			  << " 4. Check-Out Movie for Customer\n"
 			  << " 5. Check-In Movie from Customer\n\n"
 			  << " 0. Exit Store Management System\n\n"
@@ -25,8 +26,8 @@ void UserInterface::printInventory(StoreManager store) const
 {
 	std::set<Movie *> inventory = store.getInventory();
 
-	std::cout << "             INVENTORY REPORT\n"
-		<< " ===========================================\n\n";
+	std::cout << "               INVENTORY REPORT\n"
+			  << " ============================================\n\n";
 
 	for (std::set<Movie *>::iterator it = inventory.begin(); it != inventory.end(); ++it)
 		(*it)->printInfo();

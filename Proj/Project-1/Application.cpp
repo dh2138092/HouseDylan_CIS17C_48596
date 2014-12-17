@@ -29,6 +29,8 @@ int Application::execute()
 
 bool Application::initialize()
 {
+	std::cout << "\n Flicks-R-Us Store Management System\n\n";
+
 	interface = new UserInterface();
 	store = new StoreManager();
 
@@ -39,8 +41,8 @@ bool Application::initialize()
 	Godfather = new Movie("The Godfather", "Crime Drama", 1972, 175, 5, 6, 18);
 	Ikiru = new Movie("Ikiru", "Drama", 1956, 143, 6, 5, 3);
 
-	customer01 = new Customer("Dylan House", 1);
-	customer02 = new Customer("Susan House", 2);
+	Dylan = new Customer("Dylan House", 1);
+	Mark = new Customer("Mark Lehr", 2);
 
 	store->addToInventory(KillBill);
 	store->addToInventory(Annie);
@@ -49,12 +51,12 @@ bool Application::initialize()
 	store->addToInventory(Godfather);
 	store->addToInventory(Ikiru);
 
-	store->addCustomer(customer01->getId(), customer01);
-	store->addCustomer(customer02->getId(), customer02);
+	store->addCustomer(Dylan->getId(), Dylan);
+	store->addCustomer(Mark->getId(), Mark);
 
-	customer01->addMovie(Interstellar);
-	customer02->addMovie(Annie);
-	customer02->addMovie(Ikiru);
+	Dylan->addMovie(Interstellar);
+	Mark->addMovie(Annie);
+	Mark->addMovie(Shawshank);
 
 	return true;
 }
@@ -103,8 +105,8 @@ void Application::cleanup()
 	delete Godfather;
 	delete Ikiru;
 
-	delete customer01;
-	delete customer02;
+	delete Dylan;
+	delete Mark;
 }
 
 void Application::exit()
